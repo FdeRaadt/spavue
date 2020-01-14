@@ -7,12 +7,12 @@
                 <form @submit.prevent="createGameroom">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" v-model="gameroom.name">
+                        <input type="text" name="name" class="form-control" v-model="gameroom.name">
                     </div>
 
                     <div class="form-group">
                         <label>Which game</label>
-                        <input type="text" class="form-control" v-model="gameroom.game">
+                        <input type="text" name="game" class="form-control" v-model="gameroom.game">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Make Lobby</button>
@@ -32,16 +32,18 @@
         methods: {
             createGameroom() {
                 this.axios
-                    .post('api/gameroom/create',{
-                    name: name,
-                    game: game,
+                    .post('api/gameroom/create', {
+                        name: this.gameroom.name,
+                        game: this.gameroom.game,
                     })
 
-                    .then(response => (
-                        this.$router.push({
-                            name: 'create'
-                        })
-                    ))
+                    // hier vang je je succes af
+                    .then(response => {
+                        console.log(response),
+                            this.$router.push({
+                                name: 'home'
+                            })
+                    })
                     .catch(error => console.log(error))
                     .finally(() => this.loading = false)
             }

@@ -1995,10 +1995,12 @@ __webpack_require__.r(__webpack_exports__);
     createGameroom: function createGameroom() {
       var _this = this;
 
-      this.axios.post('api/gameroom/create', this.gameroom) // {  name: name,
-      // game: game,
+      this.axios.post('api/gameroom/create', {
+        name: this.gameroom.name,
+        game: this.gameroom.game
+      }) // hier vang je je succes af
       .then(function (response) {
-        return _this.$router.push({
+        console.log(response), _this.$router.push({
           name: 'home'
         });
       })["catch"](function (error) {
@@ -19771,7 +19773,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text" },
+                attrs: { type: "text", name: "name" },
                 domProps: { value: _vm.gameroom.name },
                 on: {
                   input: function($event) {
@@ -19797,7 +19799,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text" },
+                attrs: { type: "text", name: "game" },
                 domProps: { value: _vm.gameroom.game },
                 on: {
                   input: function($event) {

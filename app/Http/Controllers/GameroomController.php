@@ -25,17 +25,18 @@ class GameroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        var_dump($gameroom);
-        // var_dump($gamerooms);
+        // dd($gameroom);
+        
 
         $gameroom = new Gameroom([
             'name' => $request->input('name'),
             'game' => $request->input('game')
         ]);
-        $gameroom->save();
 
+        $gameroom->save();
+        
         return response()->json('The gameroom has been made!');
     }
 
